@@ -11,7 +11,6 @@ const Tasks = () => {
   const [textData, setTaskData] = useState([]);
   const [error, setError] = useState(null);
   const [dataRefresh, setDataRefresh] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleButtonClick = (category) => {
     setSelectedButton(category);
@@ -52,7 +51,7 @@ const Tasks = () => {
   return (
     <div>
       <div>
-        <AddTaskDialog setDataRefresh={setDataRefresh} />
+        <AddTaskDialog fetchData={fetchData} setDataRefresh={setDataRefresh} />
       </div>
 
       <div className="flex items-center justify-center py-4 md:py-8 flex-wrap">
@@ -85,7 +84,7 @@ const Tasks = () => {
           <div className="text-red-500 text-center">{error}</div>
         ) : renderTasksByPriority().length > 0 ? (
           renderTasksByPriority().map((task) => (
-            <TaskCard key={task._id} task={task} />
+            <TaskCard  key={task._id} task={task} />
           ))
         ) : (
           <div className="text-gray-500 text-center">

@@ -13,7 +13,7 @@ import {
   Select,
 } from "@mui/material";
 
-const AddTaskDialog = ({ toggleModal,setDataRefresh }) => {
+const AddTaskDialog = ({ toggleModal, setDataRefresh, fetchData }) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -39,8 +39,15 @@ const AddTaskDialog = ({ toggleModal,setDataRefresh }) => {
         "http://localhost:3001/task/tasks",
         formData
       );
-      setDataRefresh(false);
       console.log("Task added successfully:", response.data);
+      setFormData({
+        name: "",
+        description: "",
+        priority: "Low",
+        dueDate: Date, // Assuming dueDate should be reset to an empty string
+        status: "Pending",
+      });
+      fetchData();
       handleClose(); // Close modal after successful submission
     } catch (error) {
       console.error("Error adding task:", error);
