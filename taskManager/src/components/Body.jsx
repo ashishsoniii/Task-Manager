@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import Header from "./Header";
 import Login from "./Login";
 import Browse from "./Browse";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import DashBoard from "./DashBoard/DashBoard";
+import BGLog from "./BGLog";
 
 
 
@@ -16,13 +16,14 @@ const Body = () => {
 //   }, []);
 
   const appRouter = createBrowserRouter([
-    { path: "/", element: <Login /> }, // login page
+    { path: "/", element: <BGLog /> }, // login page
     { path: "/browse", element: <Browse /> }, // browse page
     { path: "/dashboard", element: <DashBoard /> }, // dashboard page
   ]);
 
   return (
     <>
+    
       <RouterProvider router={appRouter} />
     </>
   );

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.bg-on-login {
+    background: #381100;
+    height: 100vh;
+}
