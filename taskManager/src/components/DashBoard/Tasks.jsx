@@ -1,30 +1,40 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TaskCard from "./TaskCard";
+import AddTaskDialog from "./AddTaskDialog";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root"); // Set the root element for accessibility
 
 const Tasks = () => {
   const [selectedButton, setSelectedButton] = useState("All");
   const [textData, setTaskData] = useState([]);
   const [error, setError] = useState(null);
+  const [dataRefresh, setDataRefresh] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleButtonClick = (category) => {
     setSelectedButton(category);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/task/tasks");
-        console.log(response.data);
-        setTaskData(response.data);
-      } catch (error) {
-        console.error("Error fetching tasks:", error);
-        setError("Error fetching tasks. Please try again later.");
-      }
-    };
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/task/tasks");
+      console.log(response.data);
+      setTaskData(response.data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+      setError("Error fetching tasks. Please try again later.");
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [dataRefresh]);
 
   const renderTasksByPriority = () => {
     if (selectedButton === "All") {
@@ -42,14 +52,7 @@ const Tasks = () => {
   return (
     <div>
       <div>
-        <div className="relative">
-          <button
-            type="button"
-            className="absolute top-0 right-0 text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mt-2"
-          >
-            Add New Task
-          </button>
-        </div>
+        <AddTaskDialog setDataRefresh={setDataRefresh} />
       </div>
 
       <div className="flex items-center justify-center py-4 md:py-8 flex-wrap">
