@@ -12,11 +12,32 @@ router.post('/tasks', async (req, res) => {
     res.status(400).send(error);
   }
 });
-
-// Route to get all tasks
+// Route to get all tasks categorized by priority
 router.get('/tasks', async (req, res) => {
   try {
     const tasks = await Task.find();
+    const categorizedTasks = {
+      "High": [],
+      "Medium": [],
+      "Low": []
+    };
+
+    tasks.forEach(task => {
+      categorizedTasks[task.priority].push(task);
+    });
+
+    res.send(categorizedTasks);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+
+// Route to get tasks by priority
+router.get('/tasks/:priority', async (req, res) => {
+  const priority = req.params.priority;
+  try {
+    const tasks = await Task.find({ priority });
     res.send(tasks);
   } catch (error) {
     res.status(500).send(error);
