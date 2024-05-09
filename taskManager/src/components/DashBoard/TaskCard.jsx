@@ -8,6 +8,19 @@ const TaskCard = ({ task }) => {
     return task.status === "Completed" ? "text-green-500" : "text-red-500";
   };
 
+  const getPriorityColor = () => {
+    switch (task.priority) {
+      case "High":
+        return "bg-red-200 dark:bg-red-900";
+      case "Medium":
+        return "bg-yellow-200 dark:bg-yellow-900";
+      case "Low":
+        return "bg-green-200 dark:bg-green-800";
+      default:
+        return "bg-green-200 dark:bg-green-600";
+    }
+  };
+  
   const handleStatusChange = async () => {
     const confirmAction = window.confirm(
       `Are you sure you want to mark this task as ${
@@ -29,7 +42,7 @@ const TaskCard = ({ task }) => {
   };
 
   return (
-    <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div className={`block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 ${getPriorityColor()}`}>
       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         {task.name}
       </h5>

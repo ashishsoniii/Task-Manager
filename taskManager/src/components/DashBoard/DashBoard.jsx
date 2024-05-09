@@ -8,7 +8,7 @@ const DashBoard = () => {
       <Navbar />
 
       <div className="flex justify-center">
-        <div className="mx-12">
+        <div className="mx-12 my-12">
           <Tasks />
         </div>
       </div>
