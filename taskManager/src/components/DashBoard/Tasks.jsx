@@ -54,7 +54,7 @@ const Tasks = () => {
         <AddTaskDialog fetchData={fetchData} setDataRefresh={setDataRefresh} />
       </div>
 
-      <div className="flex items-center justify-center py-4 md:py-8 flex-wrap">
+      <div className="flex items-center justify-center py-4  md:py-8 flex-wrap">
         {/* Buttons for each priority */}
         <button
           type="button"
@@ -77,14 +77,16 @@ const Tasks = () => {
             {priority} Priority
           </button>
         ))}
+        {/* <AddTaskDialog fetchData={fetchData} setDataRefresh={setDataRefresh} /> */}
+
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {/* Display Task cards or error message */}
         {error ? (
           <div className="text-red-500 text-center">{error}</div>
         ) : renderTasksByPriority().length > 0 ? (
           renderTasksByPriority().map((task) => (
-            <TaskCard  key={task._id} task={task} />
+            <TaskCard key={task._id} task={task} />
           ))
         ) : (
           <div className="text-gray-500 text-center">
