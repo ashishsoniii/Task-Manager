@@ -31,8 +31,11 @@ const Login = () => {
           password,
         });
       }
-      const { token } = response.data;
+      const { token,user } = response.data;
+      // console.log
       localStorage.setItem("token", token);
+      localStorage.setItem("user", user.name);
+      localStorage.setItem("userEmail", user.email);
       navigate("/dashboard");
 
       // Redirect or perform any other action upon successful login/signup
@@ -47,7 +50,7 @@ const Login = () => {
       {/* <Header /> */}
       <div className="bg-on-login ">
         <form
-  className="absolute my-20 rounded-3xl flex-row justify-center align-middle w-full sm:w-1/2 lg:w-1/4 mx-auto p-10 right-0 left-0 bg-black bg-opacity-80 shadow-2xl"
+          className="absolute my-20 rounded-3xl flex-row justify-center align-middle w-full sm:w-1/2 lg:w-1/4 mx-auto p-10 right-0 left-0 bg-black bg-opacity-80 shadow-2xl"
           onSubmit={handleFormSubmit}
         >
           <h1 className="py-4 my-4 font-bold text-3xl  text-white rounded-xl">
