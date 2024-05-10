@@ -3,6 +3,7 @@ import axios from "axios";
 import TaskCard from "./TaskCard";
 import AddTaskDialog from "./AddTaskDialog";
 import Modal from "react-modal";
+import SearchComponent from "./Search";
 
 Modal.setAppElement("#root"); // Set the root element for accessibility
 
@@ -50,6 +51,11 @@ const Tasks = () => {
 
   return (
     <div>
+      {/* search box */}
+      <div className="flex items-center justify-center py-4  md:py-8 flex-wrap">
+        <SearchComponent textData={textData} />
+      </div>
+
       <div>
         <AddTaskDialog fetchData={fetchData} setDataRefresh={setDataRefresh} />
       </div>
@@ -78,7 +84,6 @@ const Tasks = () => {
           </button>
         ))}
         {/* <AddTaskDialog fetchData={fetchData} setDataRefresh={setDataRefresh} /> */}
-
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {/* Display Task cards or error message */}
@@ -86,7 +91,7 @@ const Tasks = () => {
           <div className="text-red-500 text-center">{error}</div>
         ) : renderTasksByPriority().length > 0 ? (
           renderTasksByPriority().map((task) => (
-            <TaskCard key={task._id} task={task} />
+            <TaskCard fetchData={fetchData} key={task._id} task={task} />
           ))
         ) : (
           <div className="text-gray-500 text-center">

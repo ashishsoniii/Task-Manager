@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import EditTaskDialog from "./EditTaskDialog";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task ,fetchData}) => {
   const [isPending, setIsPending] = useState(task.status === "Pending");
 
   const getStatusColor = () => {
@@ -20,7 +21,7 @@ const TaskCard = ({ task }) => {
         return "bg-green-200 dark:bg-green-600";
     }
   };
-  
+
   const handleStatusChange = async () => {
     const confirmAction = window.confirm(
       `Are you sure you want to mark this task as ${
@@ -42,7 +43,18 @@ const TaskCard = ({ task }) => {
   };
 
   return (
-    <div className={`block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 ${getPriorityColor()}`}>
+    <div
+      className={`relative block max-w-sm px-16 py-8 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 ${getPriorityColor()}`}
+    >
+      {/* Edit Button */}
+      <EditTaskDialog fetchData={fetchData} task={task} />
+      {/* <button
+        className="absolute top-2 right-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded"
+        onClick={() => console.log("Edit button clicked")}
+      >
+        Edit
+      </button> */}
+
       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         {task.name}
       </h5>
@@ -50,7 +62,7 @@ const TaskCard = ({ task }) => {
         Priority: {task.priority}
       </p>
       <p className="font-normal text-gray-700 dark:text-gray-400">
-        Due Date: {task.dueDate}
+        Due Date: {task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : ''}
       </p>
       <p className={`font-normal ${getStatusColor()} dark:text-gray-400`}>
         Status: {task.status}
