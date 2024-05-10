@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 
 // Define the MongoDB connection URI (replace 'test' with your database name)
-const mongoURI = "mongodb://127.0.0.1:27017/TaskManager";
+const mongoURI = "mongodb+srv://ashishsonii2002:1234567890@taskmanager.qfjmkxc.mongodb.net/TaskManager";
 
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,

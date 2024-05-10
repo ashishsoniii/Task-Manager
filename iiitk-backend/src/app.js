@@ -9,7 +9,7 @@ var cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3001;
 
-mongoose.connect("mongodb://127.0.0.1/TaskManager", {
+mongoose.connect("mongodb+srv://ashishsonii2002:1234567890@taskmanager.qfjmkxc.mongodb.net/TaskManager", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
