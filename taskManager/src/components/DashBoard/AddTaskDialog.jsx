@@ -13,7 +13,7 @@ import {
   Select,
 } from "@mui/material";
 
-const AddTaskDialog = ({ toggleModal, setDataRefresh, fetchData }) => {
+const AddTaskDialog = ({ toggleModal, setDataRefresh, fetchData, emaill }) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -21,7 +21,13 @@ const AddTaskDialog = ({ toggleModal, setDataRefresh, fetchData }) => {
     priority: "Low",
     dueDate: Date,
     status: "Pending",
+    createdByEmail:localStorage.getItem('userEmail')
   });
+  console.log(emaill);
+  console.log(emaill);
+  console.log(emaill);
+  console.log(emaill);
+  console.log(emaill);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,6 +41,8 @@ const AddTaskDialog = ({ toggleModal, setDataRefresh, fetchData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(formData);
+      console.log(formData);
       const response = await axios.post(
         "http://localhost:3001/task/tasks",
         formData
@@ -46,6 +54,8 @@ const AddTaskDialog = ({ toggleModal, setDataRefresh, fetchData }) => {
         priority: "Low",
         dueDate: Date, // Assuming dueDate should be reset to an empty string
         status: "Pending",
+        createdByEmail:emaill,
+
       });
       fetchData();
       handleClose(); // Close modal after successful submission
@@ -84,6 +94,19 @@ const AddTaskDialog = ({ toggleModal, setDataRefresh, fetchData }) => {
               required
               value={formData.name}
               onChange={handleChange}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="createdByEmail"
+              name="createdByEmail"
+              label="Email"
+              type="text"
+              fullWidth
+              required
+              value={emaill}
+              onChange={handleChange}
+              disabled
             />
             <TextField
               autoFocus

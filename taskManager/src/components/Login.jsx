@@ -30,6 +30,9 @@ const Login = () => {
           email,
           password,
         });
+        setError("User Registered Please Login!"); // Set error message from server response
+
+        
       }
       const { token,user } = response.data;
       // console.log

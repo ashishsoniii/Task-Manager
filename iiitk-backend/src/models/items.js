@@ -9,6 +9,10 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  createdByEmail: {
+    type: String,
+    required: true
+  },
   priority: {
     type: String,
     enum: ['Low', 'Medium', 'High'],

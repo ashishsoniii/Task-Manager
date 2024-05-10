@@ -7,7 +7,7 @@ import SearchComponent from "./Search";
 
 Modal.setAppElement("#root"); // Set the root element for accessibility
 
-const Tasks = () => {
+const Tasks = ({emaill}) => {
   const [selectedButton, setSelectedButton] = useState("All");
   const [textData, setTaskData] = useState([]);
   const [error, setError] = useState(null);
@@ -17,9 +17,13 @@ const Tasks = () => {
     setSelectedButton(category);
   };
 
+
+
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/task/tasks");
+      const emailji = localStorage.getItem('userEmail');
+      const response = await axios.get(`http://localhost:3001/task/taskByEmail/${emailji}`);
+      console.log(response.data);
       console.log(response.data);
       setTaskData(response.data);
     } catch (error) {
@@ -57,7 +61,7 @@ const Tasks = () => {
       </div>
 
       <div>
-        <AddTaskDialog fetchData={fetchData} setDataRefresh={setDataRefresh} />
+        <AddTaskDialog emaill={emaill} fetchData={fetchData} setDataRefresh={setDataRefresh} />
       </div>
 
       <div className="flex items-center justify-center py-4  md:py-8 flex-wrap">
@@ -91,7 +95,7 @@ const Tasks = () => {
           <div className="text-red-500 text-center">{error}</div>
         ) : renderTasksByPriority().length > 0 ? (
           renderTasksByPriority().map((task) => (
-            <TaskCard fetchData={fetchData} key={task._id} task={task} />
+            <TaskCard emaill={emaill} fetchData={fetchData} key={task._id} task={task} />
           ))
         ) : (
           <div className="text-gray-500 text-center">

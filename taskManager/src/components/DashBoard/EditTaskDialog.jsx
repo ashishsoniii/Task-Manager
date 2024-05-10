@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import editImg from "../../assets/edit.png";
 
-const EditTaskDialog = ({ toggleModal, setDataRefresh, fetchData, task }) => {
+const EditTaskDialog = ({ toggleModal, setDataRefresh, fetchData, task,emaill }) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: task.name,
@@ -24,6 +24,8 @@ const EditTaskDialog = ({ toggleModal, setDataRefresh, fetchData, task }) => {
       ? new Date(task.dueDate).toISOString().split("T")[0]
       : "",
     status: task.status,
+    createdByEmail:localStorage.getItem('userEmail')
+
   });
 
   const handleChange = (e) => {
@@ -43,13 +45,13 @@ const EditTaskDialog = ({ toggleModal, setDataRefresh, fetchData, task }) => {
         formData
       );
       alert("Task Updated successfully!");
-      setFormData({
-        name: "",
-        description: "",
-        priority: "Low",
-        dueDate: Date, // Assuming dueDate should be reset to an empty string
-        status: "Pending",
-      });
+    //   setFormData({
+    //     name: "",
+    //     description: "",
+    //     priority: "Low",
+    //     dueDate: Date, // Assuming dueDate should be reset to an empty string
+    //     status: "Pending",
+    //   });
       fetchData();
       handleClose(); // Close modal after successful submission
     } catch (error) {
