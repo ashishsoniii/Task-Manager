@@ -44,7 +44,7 @@ const AddTaskDialog = ({ toggleModal, setDataRefresh, fetchData, emaill }) => {
       console.log(formData);
       console.log(formData);
       const response = await axios.post(
-        "http://localhost:3001/task/tasks",
+        "https://task-manager-gzm9.onrender.com/task/tasks",
         formData
       );
       console.log("Task added successfully:", response.data);

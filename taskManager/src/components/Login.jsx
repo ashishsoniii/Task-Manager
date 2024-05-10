@@ -20,12 +20,12 @@ const Login = () => {
     try {
       let response;
       if (isSignInForm === "Login") {
-        response = await axios.post("http://localhost:3001/auth/login", {
+        response = await axios.post("https://task-manager-gzm9.onrender.com/auth/login", {
           email,
           password,
         });
       } else {
-        response = await axios.post("http://localhost:3001/auth/register", {
+        response = await axios.post("https://task-manager-gzm9.onrender.com/auth/register", {
           name,
           email,
           password,

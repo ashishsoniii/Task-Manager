@@ -41,10 +41,32 @@ const EditTaskDialog = ({ toggleModal, setDataRefresh, fetchData, task,emaill })
     e.preventDefault();
     try {
       const response = await axios.patch(
-        `http://localhost:3001/task/tasks/${task._id}`,
+        `https://task-manager-gzm9.onrender.com/task/tasks/${task._id}`,
         formData
       );
       alert("Task Updated successfully!");
+    //   setFormData({
+    //     name: "",
+    //     description: "",
+    //     priority: "Low",
+    //     dueDate: Date, // Assuming dueDate should be reset to an empty string
+    //     status: "Pending",
+    //   });
+      fetchData();
+      handleClose(); // Close modal after successful submission
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
+  };
+
+  const handleDel = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.delete(
+        `https://task-manager-gzm9.onrender.com/task/tasks/${task._id}`,
+        formData
+      );
+      alert("Task Deleted successfully!");
     //   setFormData({
     //     name: "",
     //     description: "",
@@ -146,6 +168,7 @@ const EditTaskDialog = ({ toggleModal, setDataRefresh, fetchData, task,emaill })
             </FormControl>
           </DialogContent>
           <DialogActions>
+            <Button onClick={handleDel}>Delete</Button>
             <Button onClick={handleClose}>Cancel</Button>
             <Button type="submit">Update Task</Button>
           </DialogActions>

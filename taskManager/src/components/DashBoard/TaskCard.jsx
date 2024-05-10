@@ -32,7 +32,7 @@ const TaskCard = ({ task, fetchData, emaill }) => {
     if (confirmAction) {
       try {
         const newStatus = isPending ? "Completed" : "Pending";
-        await axios.patch(`http://localhost:3001/task/tasks/${task._id}`, {
+        await axios.patch(`https://task-manager-gzm9.onrender.com/task/tasks/${task._id}`, {
           status: newStatus,
         });
         setIsPending(!isPending);

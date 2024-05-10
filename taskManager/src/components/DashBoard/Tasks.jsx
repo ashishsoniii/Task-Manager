@@ -22,7 +22,7 @@ const Tasks = ({emaill}) => {
   const fetchData = async () => {
     try {
       const emailji = localStorage.getItem('userEmail');
-      const response = await axios.get(`http://localhost:3001/task/taskByEmail/${emailji}`);
+      const response = await axios.get(`https://task-manager-gzm9.onrender.com/task/taskByEmail/${emailji}`);
       console.log(response.data);
       console.log(response.data);
       setTaskData(response.data);
